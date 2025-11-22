@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tina's Cafe</title>
+  <link rel="stylesheet" href="cafe-styles.css" />
+  <meta name="description" content="Tina's Cafe - 매일 갓 내린 커피와 따뜻한 공간" />
+</head>
+<body>
+  <header>
+    <h1 class="logo">Tina's Cafe</h1>
+    <nav aria-label="주요">
+      <a href="#hero">홈</a>
+      <a href="#menu">메뉴</a>
+      <a href="#about">소개</a>
+      <a href="#contact">문의</a>
+    </nav>
+  </header>
+
+  <main>
+  <section id="hero" class="hero-section" aria-label="소개">
+    <div class="slider horizontal" data-name="hero">
+      <div class="slides">
+        <img src="cafe-images/cafe-ceo.jpg"   alt="카페 전면 간판">
+        <img src="cafe-images/cafe-front.jpg" alt="출입구와 야외 좌석">
+        <img src="cafe-images/cafe-night.jpg" alt="밤의 카페 전경">
+      </div>
+      <!-- 좌/우 ‘핫존’ 클릭으로 방향 이동 -->
+      <button class="zone left"  aria-label="이전 사진"></button>
+      <button class="zone right" aria-label="다음 사진"></button>
+    </div>
+
+    <div class="hero-text">
+      <p class="badge">지금 오픈 중!</p>
+      <h2>매일 갓 내린 커피</h2>
+      <p>아침 8시부터 저녁 9시까지, 따뜻함을 내립니다.</p>
+    </div>
+  </section>
+
+
+
+    <section id="menu" aria-label="메뉴">
+  <h2>메뉴</h2>
+  <ul class="menu-grid" role="list">
+    <li class="card">
+      <article>
+        <h3>아메리카노</h3>
+        <img src="cafe-images/americano.jpg" alt="아메리카노" class="thumb">
+        <p class="desc">산뜻한 원두의 향</p>
+        <p class="price">4,000원</p>
+      </article>
+    </li>
+    <li class="card">
+      <article>
+        <h3>라떼</h3>
+        <img src="cafe-images/latte.jpg" alt="라떼" class="thumb">
+        <p class="desc">부드러운 우유 거품</p>
+        <p class="price">4,500원</p>
+      </article>
+    </li>
+    <li class="card">
+      <article>
+        <h3>바닐라라떼</h3>
+        <img src="cafe-images/vanilla-latte.jpg" alt="바닐라라떼" class="thumb">
+        <p class="desc">바닐라 시럽 추가</p>
+        <p class="price">5,000원</p>
+      </article>
+    </li>
+    <li class="card">
+      <article>
+        <h3>카페모카</h3>
+        <img src="cafe-images/cafe-mocha.jpg" alt="카페모카" class="thumb">
+        <p class="desc">초콜릿과 커피의 만남</p>
+        <p class="price">5,000원</p>
+      </article>
+    </li>
+    <li class="card">
+      <article>
+        <h3>디카페인</h3>
+        <img src="cafe-images/decaf.jpg" alt="디카페인" class="thumb">
+        <p class="desc">늦은 밤에도 부담 없이</p>
+        <p class="price">5,000원</p>
+      </article>
+    </li>
+  </ul>
+</section>
+
+
+   <section id="about" aria-label="가게 소개">
+  <h2>한잔의 여유가 한장의 추억속으로</h2>
+  <p>작은 한 잔에도 정성을 담아, 동네 분들이 편히 쉬어갈 수 있는 공간을 만들고 있습니다.</p>
+
+  <div class="slider horizontal" data-name="about">
+    <div class="slides">
+      <img src="cafe-images/cafe-img.jpg"        alt="내부1">
+      <img src="cafe-images/cafe-img2.jpg"        alt="내부2">
+      <img src="cafe-images/cafe-img3.jpg"        alt="내부3">
+      <img src="cafe-images/cafe-img4.jpg"        alt="내부4">
+    </div>
+    <button class="zone left"  aria-label="이전 사진"></button>
+    <button class="zone right" aria-label="다음 사진"></button>
+  </div>
+</section>
+
+
+    <section id="contact" aria-label="문의하기">
+      <h2>문의하기</h2>
+      <p>hello@dongne-cafe.test</p>
+      <div class="contact-links">
+        <p><a href="https://maps.google.com" target="_blank" rel="noopener">오시는 길(구글 지도)</a></p>
+      </div>
+
+      <figure class="beans">
+        <img src="cafe-images/black-caffee-bin.jpg" alt="원두와 라떼 아트 컵 사진" />
+        <figcaption>매일 아침 로스팅한 원두를 사용합니다.</figcaption>
+      </figure>
+    </section>
+  </main>
+
+  <footer>
+    <p><small>© 2025 Tina's Cafe</small></p>
+    <p><small>Tel : 010-0000-0000 </small></p>
+    <p><small>Street Address : 전라남도 광양시 OO길 00</small></p>
+  </footer>
+
+<script>
+(() => {
+  const AUTOPLAY_MS = 3500;   // 자동 전환 간격 (오→왼으로 진행)
+  const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll('.slider.horizontal').forEach((root) => {
+    const track  = root.querySelector('.slides');
+    const slides = Array.from(track.children);
+    const leftZone  = root.querySelector('.zone.left');
+    const rightZone = root.querySelector('.zone.right');
+
+    let index = 0;
+    let timer = null;
+
+    function goTo(i) {
+      index = (i + slides.length) % slides.length;
+      track.style.transform = `translateX(-${index * 100}%)`;
+    }
+    function next() { goTo(index + 1); }   // 화면은 왼쪽으로 이동(오→왼 자동 진행)
+    function prev() { goTo(index - 1); }   // 화면은 오른쪽으로 이동
+
+    function start() { if (!REDUCED) { stop(); timer = setInterval(next, AUTOPLAY_MS); } }
+    function stop()  { if (timer) { clearInterval(timer); timer = null; } }
+
+    // 좌/우 클릭으로 방향 이동
+    rightZone.addEventListener('click', () => { next(); start(); });
+    leftZone .addEventListener('click', ()  => { prev(); start(); });
+
+    // 슬라이더 전체를 클릭해도 좌/우에 따라 이동하고 싶다면:
+    root.addEventListener('click', (e) => {
+      if (e.target.closest('.zone')) return; // 이미 핫존이면 위 핸들러로 처리
+      const rect = root.getBoundingClientRect();
+      (e.clientX - rect.left) > rect.width / 2 ? next() : prev();
+      start();
+    });
+
+    // 호버/포커스 시 자동재생 일시중지
+    root.addEventListener('pointerenter', stop);
+    root.addEventListener('pointerleave', start);
+    root.addEventListener('focusin', stop);
+    root.addEventListener('focusout', start);
+
+    // 터치 스와이프
+    let sx = null;
+    root.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; stop(); }, {passive:true});
+    root.addEventListener('touchend',   (e) => {
+      if (sx == null) return;
+      const dx = e.changedTouches[0].clientX - sx;
+      if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); }
+      sx = null; start();
+    });
+
+    // 초기화
+    goTo(0);
+    start();
+  });
+})();
+</script>
+
+</body>
+</html>

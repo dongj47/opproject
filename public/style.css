@@ -1,0 +1,118 @@
+/* 기본값 정리 */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+ul { list-style: none; }
+a { text-decoration: none; color: inherit; }
+body { font-family: sans-serif; }
+
+/* 제목 */
+.title { text-align: center; margin: 20px 0; }
+
+/* 상단 메뉴 바 전체 */
+.menu {
+  background: rgb(170, 158, 158);
+  width: 100%;              /* 화면 가로 전체 사용 */
+}
+
+/* 메뉴 리스트 (github / portfolio / profile 담고 있는 곳) */
+.menu_item {
+  display: flex;            /* 가로로 나란히 */
+  width: 100%;              /* 한 줄 전체 차지 */
+}
+
+/* 1단 메뉴(li) – 각각을 1/3씩 차지하게 */
+.f_menu {
+  position: relative;
+  flex: 1 1 0;              /* 화면을 균등 분할해서 꽉 채움 */
+  text-align: center;
+}
+
+/* 1단 메뉴 링크 – li 너비 전체 사용 */
+.f_menu > a {
+  display: block;
+  width: 100%;
+  padding: 12px 0;
+  border-radius: 0;         /* 필요하면 다시 6px 등으로 변경 가능 */
+}
+
+/* 마우스 올리면 배경색 변경 */
+.f_menu > a:hover {
+  background: gray;
+}
+
+/* 2단 드롭다운 */
+.s_menu {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  display: none;            /* 기본 숨김 */
+  background: white;
+  padding: 6px;
+  min-width: 100%;          /* 부모 li 너비만큼 펼치기 */
+  border: 1px solid white;
+  border-radius: 6px;
+}
+
+.s_menu a {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 4px;
+}
+
+.s_menu a:hover {
+  background: white;
+}
+
+/* 마우스 올리면 드롭다운 열기 */
+.f_menu:hover > .s_menu {
+  display: block;
+}
+
+/* 사진 + 상세정보 전체를 감싸는 박스 */
+.profile-wrap {
+  display: flex;              /* 가로로 나란히 */
+  justify-content: center;    /* 화면 기준 가운데 정렬 */
+  align-items: center;        /* 위쪽 라인 맞추기 */
+  gap: 40px;                  /* 사진과 글 사이 간격 */
+  margin-top: 60px;
+}
+
+/* 기본 ul 스타일 제거 */
+.profile,
+.detail {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* 왼쪽 프로필 (사진 + 이름) */
+.profile {
+  text-align: center;
+}
+
+/* 동그란 프로필 사진 */
+.profile img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  margin-bottom: 8px;         /* 사진과 이름 사이 간격 */
+}
+
+/* 사진 아래 이름 */
+.profile p {
+  margin: 0;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+/* 오른쪽 상세 정보 */
+.detail li {
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+
+
+
+
