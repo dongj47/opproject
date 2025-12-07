@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portfolio-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: portfolio-app
+  template:
+    metadata:
+      labels:
+        app: portfolio-app
+    spec:
+      containers:
+        - name: portfolio-app
+          image: YOUR_DOCKER_ID/portfolio-app:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DB_HOST_MYSQL
+              value: "mysql"
+            - name: DB_PORT_MYSQL
+              value: "3306"
+            - name: DB_USER_MYSQL
+              value: "root"
+            - name: DB_PASS_MYSQL
+              value: "qwer1234"
+            - name: DB_NAME_MYSQL
+              value: "portfolio"
+            - name: MONGO_URI
+              value: "mongodb://mongo:27017"
+            - name: MONGO_DB_NAME
+              value: "portfolio"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: portfolio-app-service
+spec:
+  type: LoadBalancer        # Minikube면 NodePort로 바꿔도 OK
+  selector:
+    app: portfolio-app
+  ports:
+    - port: 80
+      targetPort: 3000
