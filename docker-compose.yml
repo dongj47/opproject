@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    container_name: portfolio-app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+
+      # MySQL 연결 정보 (server.js에서 읽어감)
+      - DB_HOST_MYSQL=mysql
+      - DB_PORT_MYSQL=3306
+      - DB_USER_MYSQL=root
+      - DB_PASS_MYSQL=qwer1234
+      - DB_NAME_MYSQL=portfolio
+
+      # MongoDB 연결 정보
+      - MONGO_URI=mongodb://mongo:27017
+      - MONGO_DB_NAME=portfolio
+
+    depends_on:
+      - mysql
+      - mongo
+
+  mysql:
+    image: mysql:8
+    container_name: portfolio-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=qwer1234
+      - MYSQL_DATABASE=portfolio
+    ports:
+      - "3306:3306"
+
+  mongo:
+    image: mongo:7
+    container_name: portfolio-mongo
+    ports:
+      - "27017:27017"
